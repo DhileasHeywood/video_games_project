@@ -190,41 +190,88 @@ sales_other %>%
   ylim(c(0, 0.6))
 
 
-# Globally, games released on Xbox sell more copies on average than on playstation
+# Globally, games released on Xbox sell more copies on average than on playstation, despite there being more games released on playstation. 
+# nintendo has the third highest average global sales with 0.3 million. PC is surprisingly low in my opinion, but I'm biased as a PC gamer. 
+
+# looking at the data from North America, games released on x box have the highest mean number of sales, again, followed by playstation, and like
+# the global data, playstation has more games released. 
+
+# In Europe, games released on playstation have the highest mean number of sales, as well as the highest number of games released. 
+
+# In Japan, the platform with the highest mean number of sales is Nintendo, followed by Playstation and platforms not in the usual big 4, which
+# makes sense, as most of the other platforms are Japanese. 
+
+# In other regions, Playstation has the highest mean number of sales, follwed by Xbox. 
 
 
 
 
 
 
+# I'm interested to see how year released affects this data.
 
 
+sales_global %>% 
+  ggplot(aes(x = year, y = global_sales)) +
+  geom_col() 
 
+# Here we can see that The data is left skewed, with a peak in 2008 when around 575 million games were sold in total. There aren't many sales in 
+# 2019 or 2020. This isn't surprising for 2020 as it's still early in the year, but it's surprising for 2019. I suspect this is due to a lack of 
+# data, rather than people not buying games. 
+# I'd like to see how many games were released each year. 
 
+sales_global %>% 
+  group_by(year) %>% 
+  summarise(number_released = n()) %>% 
+  ggplot(aes(x = year, y = number_released)) +
+  geom_col() 
 
+# There is also a peak in number of games released in 2008, which corresponds to the peak in number of sales in 2008. 
 
-
-sales %>% 
-  filter(!is.na(year)) %>% 
-  ggplot(aes(x = year, y = global_sales, fill = genre)) +
+# I'd like to split this graph up into genres. 
+sales_global %>% 
+  group_by(year, genre) %>% 
+  summarise(number_released = n()) %>% 
+  ggplot(aes(x = year, y = number_released, fill = genre)) +
   geom_col() + 
   scale_fill_viridis_d()
 
-sales %>% 
-  filter(!is.na(year)) %>% 
+# Ow my eyes. Having said that it looks like there are a lot of sports games released, especially in 2005-2010.
+# let's look at that in more detail. 
+
+sales_global %>% 
+  filter(genre == "Sports" | genre == "Shooter" | genre == "Action" | genre == "Action-Adventure") %>% 
+  group_by(year, genre) %>% 
+  summarise(number_released = n()) %>% 
+  ggplot(aes(x = year, y = number_released, fill = genre)) +
+  geom_col() + 
+  scale_fill_viridis_d()
+
+# It's easier to say that the number of sports games released each year has been decreasing since 2010. It looks like the average number of Action 
+# games released each year has stayed about the same, maybe decreasing a bit. 
+# In addition, Action-Adventure games didn't exist before 2012. 
+
+
+# I'd like to look at how many games are sold compared to how many are released. 
+sales_global %>% 
   group_by(year) %>% 
   summarise(number_released = n(), global_sales = sum(global_sales)) %>% 
   mutate(sales_per_games_released = (global_sales/number_released)) %>% 
   ggplot(aes(x = year, y = sales_per_games_released))+
-  geom_col()+
-  scale_fill_viridis_b()
+  geom_col()
+
+# So again, 2019 and 2020 are a bit low, but I think it's due to lack of data about these years. 
+# from about 1995 to 2018, it looks as though the trend is cyclical with a time of 6 years or so. fluctuating between about 0.25 million games 
+# sold per game released and 0.5 million games sold per game released. Minecraft was released in 2014, which is going to skew things, because 
+# minecraft is unbelievably popular. 
 
 
-sales %>% 
-  filter(!is.na(year)) %>% 
-  group_by(year) %>% 
-  summarise(number_released = n(), global_sales = sum(global_sales)) %>%
-  ggplot(aes(x = number_released, y = global_sales)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
+# I'd really like to look at some of the above graphs for more recent years. Let's 
 
+#sales_global %>% 
+#  group_by(year) %>% 
+#  summarise(number_released = n(), global_sales = sum(global_sales)) %>%
+#  ggplot(aes(x = number_released, y = global_sales)) +
+#  geom_point() +
+#  geom_smooth(method = "lm", se = FALSE)
+#

@@ -44,7 +44,7 @@ sales_all_regions <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform), 
-         platform = ifelse(platform == "sony" | platform == "xbox" | platform == "mobile" | platform == "nintendo" | platform == "pc", 
+         platform = ifelse(platform == "playstation" | platform == "xbox" | platform == "mobile" | platform == "nintendo" | platform == "pc", 
                            "other", platform))
 
 write_csv(sales_all_regions, path = "clean_data/sales_all_regions.csv")
@@ -87,7 +87,7 @@ sales_global <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
-         platform = ifelse(platform != "sony" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
+         platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
                            "other", platform)
          )
 
@@ -134,7 +134,7 @@ sales_north_america <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
-         platform = ifelse(platform != "sony" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
+         platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
                            "other", platform)
   )
 
@@ -180,7 +180,7 @@ sales_europe <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
-         platform = ifelse(platform != "sony" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
+         platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
                            "other", platform)
   )
 
@@ -224,7 +224,7 @@ sales_japan <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
-         platform = ifelse(platform != "sony" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
+         platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
                            "other", platform)
   )
 
@@ -269,7 +269,7 @@ sales_other <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
-         platform = ifelse(platform != "sony" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
+         platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
                            "other", platform)
   )
 
