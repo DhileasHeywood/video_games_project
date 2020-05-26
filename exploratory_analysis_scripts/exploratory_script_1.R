@@ -1,6 +1,13 @@
 library(tidyverse)
 
 
+sales_global <- read_csv("clean_data/sales_global.csv")
+sales_north_america <- read_csv("clean_data/sales_north_america.csv")
+sales_europe <- read_csv("clean_data/sales_europe.csv")
+sales_japan <- read_csv("clean_data/sales_japan.csv")
+sales_other <- read_csv("clean_data/sales_other.csv")
+sales_all_regions <- read_csv("clean_data/sales_all_regions.csv")
+
 
 # Firstly, I'd like to see which genres have the most sales for each region
 sales_global %>% 
@@ -266,12 +273,18 @@ sales_global %>%
 # minecraft is unbelievably popular. 
 
 
-# I'd really like to look at some of the above graphs for more recent years. Let's 
+# I'd really like to look at some of the above graphs for more recent years, since it's probably not nearly as relevant to be looking at what the 
+# industry was like in the 90s. I'm going to look at all games released since 2000
 
-#sales_global %>% 
-#  group_by(year) %>% 
-#  summarise(number_released = n(), global_sales = sum(global_sales)) %>%
-#  ggplot(aes(x = number_released, y = global_sales)) +
-#  geom_point() +
-#  geom_smooth(method = "lm", se = FALSE)
-#
+sales_global %>% 
+  filter(!str_detect(name, "[Mm]inecraft"), year >= 2000) %>% 
+  group_by(genre) %>% 
+  summarise(mean_global_sales = mean(global_sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = genre, y = mean_global_sales, fill = number_games)) +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_viridis_b() 
+
+# This graph is relatively similar to the initial graph. 
+
+
