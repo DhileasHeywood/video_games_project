@@ -1,0 +1,67 @@
+---
+title: "Video Game Sales"
+author: "Dhileas Heywood"
+date: "27/05/2020"
+output:
+  powerpoint_presentation: default
+  slidy_presentation: default
+  beamer_presentation: default
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(knitr)
+sales_global <- read_csv("../clean_data/sales_global.csv")
+sales_north_america <- read_csv("../clean_data/sales_north_america.csv")
+sales_europe <- read_csv("../clean_data/sales_europe.csv")
+sales_japan <- read_csv("../clean_data/sales_japan.csv")
+sales_other <- read_csv("../clean_data/sales_other.csv")
+sales_all_regions <- read_csv("../clean_data/sales_all_regions.csv")
+```
+
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Project Brief
+
+* To understand what types of games sell a lot of copies 
+* In particular, analysis to help make a decision on which direction to take the company
+
+## What Genre of Games Sells the Most Copies?
+```{r}
+sales_global %>% 
+  #filter(!str_detect(name, "[Mm]inecraft")) %>% 
+  group_by(genre) %>% 
+  summarise(mean_global_sales = mean(global_sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = genre, y = mean_global_sales)) +
+  geom_col() +
+  labs(x = "Genre",
+       y = "Mean Global Sales (Millions)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) #+
+  #scale_fill_viridis_b() +
+  #ylim(0, 0.7)
+```
+
+
+## But How Many Games are in Each Category?
+
+```{r cars, echo = FALSE}
+sales_global %>% 
+  group_by(genre) %>% 
+  summarise(`Mean Global Sales` = mean(global_sales), `Number of Games` = length(unique(name))) %>% 
+  arrange(`Number of Games`) %>% 
+  head(12) %>% 
+  kable()
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
