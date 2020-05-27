@@ -23,6 +23,9 @@ ratings_clean <- ratings %>%
          critic_score = ifelse(is.na(ratings$critic_score), rating_score_intercept + (rating_score_gradient * user_score), critic_score))
 
 
+write_csv(ratings_clean, path = "clean_data/ratings_clean.csv")
+
+#confirming that the NA imputing has worked. 
 steve <- tibble(ratings$critic_score - ratings_clean$critic_score)
 
 ratings %>% 
