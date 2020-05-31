@@ -2,54 +2,6 @@ library(janitor)
 library(tidyverse)
 
 
-sales_all_regions <- read_csv("raw_data/sales-2019.csv") %>% 
-  clean_names() %>% 
-  # img_url and url aren't useful for analysis. last_update is unrelated to the game.
-  # vg_chartz_score is only NA values
-  # status only has values of 1
-  # total_shipped only has NA values. 
-  # user_score only has 174 / ~19000 values that are not NA
-  select(-img_url, 
-         -url, 
-         -last_update, 
-         -vg_chartz_score, 
-         -status, 
-         -total_shipped, 
-         -user_score, 
-         -vgchartzscore, 
-         -critic_score) %>% 
-  # I'm interested in global sales, so I'm going to drop NA values from that column
-  filter(!is.na(global_sales),
-         !is.na(na_sales),
-         !is.na(pal_sales),
-         !is.na(jp_sales),
-         !is.na(other_sales),
-         !is.na(year)) %>% 
-  # Changing NA values in the esrb rating column to be 'unrated', to avoid confusion, and to allow for modelling
-  mutate(esrb_rating = replace_na(esrb_rating, "unrated")) %>% 
-  # pivoting the table longer for ease of analysis
-  pivot_longer(cols = na_sales:other_sales, names_to = "region", values_to = "regional_sales") %>% 
-  # getting rid of the _sales suffix from each region, and making the regions more intelligible
-  separate(col = region, sep = "_", into = c("region", "junk")) %>% 
-  select(-junk) %>% 
-  mutate(region = ifelse(region == "na", "north america", region),
-         region = ifelse(region == "pal", "europe", region),
-         region = ifelse(region == "jp", "japan", region)) %>% 
-  mutate(platform = ifelse(str_detect(platform, "^PS[A-Za-z0-9]*"), "playstation", platform),
-         platform = ifelse(str_detect(platform, "^X[A-Z0-9a-z]+"), "xbox", platform),
-         platform = ifelse(str_detect(platform, "Mob"), "mobile", platform),
-         platform = ifelse(str_detect(platform, "N[A-FH-Z0-9]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "^G[ABC]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "W[A-Za-z]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
-         platform = ifelse(str_detect(platform, "OSX"), "pc", platform), 
-         platform = ifelse(platform == "playstation" | platform == "xbox" | platform == "mobile" | platform == "nintendo" | platform == "pc", 
-                           "other", platform))
-
-write_csv(sales_all_regions, path = "clean_data/sales_all_regions.csv")
-
-
 
 #reading in data, and removing unhelpful columns. 
 sales_global <- read_csv("raw_data/sales-2019.csv") %>% 
@@ -83,12 +35,14 @@ sales_global <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "Mob"), "mobile", platform),
          platform = ifelse(str_detect(platform, "N[A-FH-Z0-9]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^G[ABC]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "W[A-Za-z]+"), "nintendo", platform),
+         platform = ifelse(str_detect(platform, "W[A-RT-Za-rt-z]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
          platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
-                           "other", platform)
+                           "other", platform),
+         publisher = str_to_lower(publisher),
+         publisher_ranked = publisher %in% ranked_publishers
          )
 
 
@@ -130,7 +84,7 @@ sales_north_america <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "Mob"), "mobile", platform),
          platform = ifelse(str_detect(platform, "N[A-FH-Z0-9]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^G[ABC]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "W[A-Za-z]+"), "nintendo", platform),
+         platform = ifelse(str_detect(platform, "W[A-RT-Za-rt-z]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
@@ -176,7 +130,7 @@ sales_europe <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "Mob"), "mobile", platform),
          platform = ifelse(str_detect(platform, "N[A-FH-Z0-9]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^G[ABC]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "W[A-Za-z]+"), "nintendo", platform),
+         platform = ifelse(str_detect(platform, "W[A-RT-Za-rt-z]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
@@ -220,8 +174,9 @@ sales_japan <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "Mob"), "mobile", platform),
          platform = ifelse(str_detect(platform, "N[A-FH-Z0-9]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^G[ABC]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "W[A-Za-z]+"), "nintendo", platform),
+         platform = ifelse(str_detect(platform, "W[A-RT-Za-rt-z]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
+         platform = ifelse(str_detect(platform, "^VC"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
          platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
@@ -265,12 +220,13 @@ sales_other <- read_csv("raw_data/sales-2019.csv") %>%
          platform = ifelse(str_detect(platform, "Mob"), "mobile", platform),
          platform = ifelse(str_detect(platform, "N[A-FH-Z0-9]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^G[ABC]+"), "nintendo", platform),
-         platform = ifelse(str_detect(platform, "W[A-Za-z]+"), "nintendo", platform),
+         platform = ifelse(str_detect(platform, "W[A-RT-Za-rt-z]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "3D[OS]+"), "nintendo", platform),
          platform = ifelse(str_detect(platform, "^PC[A-Z]*"), "pc", platform), 
          platform = ifelse(str_detect(platform, "OSX"), "pc", platform),
          platform = ifelse(platform != "playstation" & platform != "xbox" & platform != "mobile" & platform != "nintendo" & platform != "pc", 
-                           "other", platform)
+                           "other", platform),
+         publisher = str_to_lower(publisher)
   )
 
 
@@ -323,7 +279,89 @@ unique(sales_global$platform)
 
 # "PS3"  "PS4"  "PS2"  "X360" "Wii"  "XOne" "PC"   "PSP"  "PS"   "DS"   "NS"   "2600" "GBA"  "NES"  "XB"   "3DS"  "PSN"  "GEN"  "PSV"  "DC"  
 # "N64"  "GB"   "SNES" "SAT"  "GBC"  "GC"   "SCD"  "WiiU" "WS"   "VC"   "NG"   "WW"   "PCE"  "XBL"  "3DO"  "GG"   "OSX"  "PCFX" "Mob" 
-
+ 
 # I'm going to make 5 categories. Microsoft (for all xbox games), Sony (for anything playstation related), Nintendo (for Nintendos), PC (for any
 # pc platforms), mobile (for mobile games), and other, for anything that doesn't fit into those categories (your Atari and your WonderSwan)
 
+
+# Joining newly formed graphs together
+
+sales_regional <- left_join(sales_north_america, 
+                            sales_europe, 
+                            by = c("name", "basename", "genre", "esrb_rating", "platform", "publisher", "developer", "year", "rank")) %>%
+  left_join(sales_japan, by = c("name", "basename", "genre", "esrb_rating", "platform", "publisher", "developer", "year", "rank")) %>% 
+  left_join(sales_other, by = c("name", "basename", "genre", "esrb_rating", "platform", "publisher", "developer", "year", "rank")) %>% 
+  pivot_longer(cols = c("na_sales", "pal_sales", "jp_sales", "other_sales"), names_to = "region", values_to = "sales") %>% 
+  separate(col = region, into = c("region", "rubbish"), sep = "_") %>% 
+  select(-rubbish) %>% 
+  mutate(region = ifelse(region == "pal", "europe", region),
+         region = ifelse(region == "na", "north america", region),
+         region = ifelse(region == "jp", "japan", region)) %>% 
+  drop_na() %>% 
+  mutate(publisher = str_to_lower(publisher),
+         developer = str_to_lower(developer),
+         publisher_ranked = publisher %in% ranked_publishers)
+
+write_csv(sales_regional, path = "clean_data/sales_all_regions.csv")
+
+
+# In order to do analysis of games publishers, I need to find a source of ranking them. Part of the data supplied contains ratings from 
+# Metacritic, who also publish a list of top games publishers every year. I'm going to take data from their 2019 list for 2018 releases, 
+# abd their 2017 list for 2016 releases. (There's no list for 2017 releases.)
+
+# source: https://www.metacritic.com/feature/game-publisher-rankings-for-2018-releases
+
+ranked_publishers <- c("capcom", 
+                       "sega", 
+                       "electronic arts", 
+                       "ea",
+                       "nintendo", 
+                       "ubisoft", 
+                       "sony", 
+                       "square enix", 
+                       "bandai namco entertainment",
+                       "digerati distribution", 
+                       "nis america", 
+                       "plug in digital", 
+                       "focus home interactive", 
+                       "thq nordic",
+                       "activision blizzard", 
+                       "paradox interactive",
+                       "505 games", 
+                       "take-two interactive", 
+                       "aksys games", 
+                       "bethseda softworks",
+                       "microsoft", 
+                       "devolver digital",
+                       "team17",
+                       "arc system works", 
+                       "warner bros. interact",
+                       "zen studios", 
+                       "curve digital",
+                       "koel tecmo games",
+                       "adult swim",
+                       "konami",
+                       "microids",
+                       "milestone s.r.l", 
+                       "1c entertainment", 
+                       "headup games", 
+                       "tinybuild", 
+                       "good shepherd ent.", 
+                       "flyhigh works", 
+                       "wales interactive", 
+                       "qubicgames", 
+                       "xseed/marvelous", 
+                       "ratalalka games", 
+                       "2k", 
+                       "rockstar", 
+                       "xseed games",
+                       "marvelous usa",
+                       "telltale games",
+                       "warner bros. interactive",
+                       "degica",
+                       "daedalic entertainment",
+                       "gambitious digital ent.",
+                       "artifex mundi",
+                       "10tons entertainment",
+                       "idea factory international",
+                       "deep silver")

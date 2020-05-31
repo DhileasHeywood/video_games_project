@@ -35,10 +35,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ## What Genre of Games Sells the Most Copies?
 ```{r}
 sales_global %>% 
+  filter(year > 1999) %>% 
   #filter(!str_detect(name, "[Mm]inecraft")) %>% 
   group_by(genre) %>% 
-  summarise(mean_global_sales = mean(global_sales), number_games = length(unique(name))) %>% 
-  ggplot(aes(x = genre, y = mean_global_sales)) +
+  summarise(median_global_sales = median(global_sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = genre, y = median_global_sales)) +
   geom_col() +
   labs(x = "Genre",
        y = "Mean Global Sales (Millions)") +
@@ -50,18 +51,121 @@ sales_global %>%
 
 ## But How Many Games are in Each Category?
 
-```{r cars, echo = FALSE}
+```{r, echo = FALSE}
 sales_global %>% 
+  filter(year > 1999) %>% 
   group_by(genre) %>% 
-  summarise(`Mean Global Sales` = mean(global_sales), `Number of Games` = length(unique(name))) %>% 
+  summarise(`Median Global Sales` = median(global_sales), `Number of Games` = length(unique(name))) %>% 
   arrange(`Number of Games`) %>% 
   head(12) %>% 
   kable()
 ```
 
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
+## Corrected to Compensate for Minecraft
+```{r echo=FALSE, fig.height=7.5, fig.width=10}
+sales_global %>% 
+  filter(year > 1999) %>% 
+  group_by(genre) %>% 
+  summarise(median_global_sales = median(global_sales), number_games = length(unique(name))) %>% 
+  filter(number_games >= 10) %>% 
+  ggplot(aes(x = genre, y = median_global_sales)) +
+  geom_col() +
+  labs(x = "Genre",
+       y = "Mean Global Sales (Millions)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_label(aes(label = number_games), vjust = 1.2) 
 ```
 
+## What About Seperate Markets?
+```{r fig.height=7.5, fig.width=10}
+sales_all_regions %>% 
+  filter(year > 1999) %>% 
+  group_by(genre, region) %>% 
+  summarise(median_sales = median(regional_sales), number_games = length(unique(name))) %>% 
+  filter(number_games >= 10) %>% 
+  ggplot(aes(x = genre, y = median_sales, fill = number_games)) +
+  geom_col() +
+  labs(x = "Genre",
+       y = "Mean Global Sales (Millions)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_viridis_b()+
+  #geom_label(aes(label = number_games), vjust = 1) +
+  facet_wrap(~ region, scales = "fixed")
+  
+  
+```
+
+
+## The Global Markets
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+sales_all_regions %>% 
+  ggplot(aes(x = global_sales, y = regional_sales)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  xlab("Global Sales") +
+  ylab("Regional Sales") +
+  facet_wrap(~ region) +
+  scale_colour_viridis_d(option = "viridis")
+```
+
+## How do Sales Compare With Rating?
+
+```{r}
+sales_all_regions %>% 
+  filter(year > 1999, region == "europe" | region == "north america") %>% 
+  group_by(esrb_rating, region) %>% 
+  summarise(median_sales = median(regional_sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = esrb_rating, y = median_sales)) +
+  geom_col() +
+  labs(x = "ESRB Rating",
+       y = "Mean Sales (Millions)") +
+  facet_wrap(~ region) +
+  geom_label(aes(label = number_games), vjust = 1.2) 
+```
+
+## How Do Sales Differ for Different Platforms?
+
+```{r}
+sales_na_eu <- left_join(sales_north_america, sales_europe, by = c("name", "basename", "genre", "esrb_rating", "platform", "publisher", "developer", "year", "rank")) %>% 
+  pivot_longer(cols = c("na_sales", "pal_sales"), names_to = "region", values_to = "sales") %>% 
+  separate(col = region, into = c("region", "rubbish"), sep = "_") %>% 
+  select(-rubbish) %>% 
+  mutate(region = ifelse(region == "pal", "europe", "north america")) %>% 
+  drop_na()
+  
+sales_na_eu %>% 
+  group_by(platform, region) %>% 
+  summarise(median_sales = median(sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = platform, y = median_sales)) +
+  geom_col() +
+  scale_fill_viridis_c() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  facet_wrap(~ region) +
+  geom_label(aes(label = number_games), vjust = 1.2) 
+```
+
+## When This is Put Together
+```{r}
+sales_na_eu %>% 
+  filter(genre == "Shooter" | genre == "Racing" | genre == "Sports" | genre == "Action" | genre == "Action-Adventure" | genre == "Platform",
+         esrb_rating == "M" | esrb_rating == "E" | esrb_rating == "T") %>% 
+  group_by(platform, region, genre, esrb_rating) %>% 
+  summarise(median_sales = median(sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = platform, y = median_sales, fill = genre)) +
+  geom_col() +
+  scale_fill_viridis_d() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  facet_wrap(esrb_rating ~ region, ncol = 2) #+
+  #geom_label(aes(label = number_games), vjust = 1.2)  
+```
+
+## In Conclusion
+
+* Games with an ESRB rating of "Mature" sell more games on average
+* Games released on XBox and PlayStation sell well in Europe and North America
+\t* Games released on PC do better in Europe
+\t* Games released on Nintendo do better in North America
+* Games in the Shooter, Platform and Action/Action-Adventure genres sell well. 
+
+## Any Questions?

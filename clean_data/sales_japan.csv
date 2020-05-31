@@ -1561,7 +1561,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 4503,Dragon Ball: Raging Blast,dragon-ball-raging-blast,Fighting,T,xbox,Namco Bandai,Spike,0.02,2009
 4506,Yokai Watch Busters 2: Hihou Densetsu Banbarayaa - Magnum / Sword,yokai-watch-busters-2-hihou-densetsu-banbarayaa---magnum,Role-Playing,unrated,nintendo,Level 5,Level 5,0.51,2017
 4507,Theatrhythm: Final Fantasy,theatrhythm-final-fantasy,Misc,E10,nintendo,Square Enix,Jupiter Multimedia,0.18,2012
-4512,Final Fantasy,final-fantasy,Role-Playing,unrated,nintendo,Square,SquareSoft,0.51,2000
+4512,Final Fantasy,final-fantasy,Role-Playing,unrated,other,Square,SquareSoft,0.51,2000
 4519,Capcom Classics Collection,capcom-classics-collection,Misc,T,playstation,Capcom,Digital Eclipse,0.05,2005
 4521,Fire Emblem Warriors,fire-emblem-warriors,Action,T,nintendo,Nintendo,Omega Force,0.1,2017
 4528,Homefront: The Revolution,homefront-the-revolution,Shooter,M,playstation,Deep Silver,Dambuster Studios,0.04,2016
@@ -2330,7 +2330,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 7004,Bladestorm: The Hundred Years' War,bladestorm-the-hundred-years-war,Action,T,playstation,KOEI,Omega Force,0.14,2007
 7014,Netsu Chu! Pro Yakyuu 2003,netsu-chu-pro-yakyuu-2003,Sports,unrated,playstation,Namco,Namco,0.28,2003
 7015,Next Hatsune Miku: Project Diva,next-hatsune-miku-project-diva,Music,unrated,playstation,Sega,Sega,0.19,2013
-7017,Digimon Adventure: Anode Tamer,digimon-adventure-anode-tamer,Role-Playing,unrated,nintendo,Bandai,Bandai,0.28,1999
+7017,Digimon Adventure: Anode Tamer,digimon-adventure-anode-tamer,Role-Playing,unrated,other,Bandai,Bandai,0.28,1999
 7018,DeathSmiles,deathsmiles,Shooter,T,xbox,Aksys Games,Cave,0.05,2010
 7023,The King of Fighters '95,the-king-of-fighters-95,Fighting,unrated,other,SNK,SNK Corporation,0.28,1996
 7026,Final Fantasy VI Advance,final-fantasy-vi-advance,Role-Playing,E10,nintendo,Nintendo,Square Enix,0.28,2007
@@ -2403,7 +2403,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 7259,Brain Age: Concentration Training,brain-age-concentration-training,Misc,E,nintendo,Nintendo,Nintendo,0.27,2013
 7262,Yu-Gi-Oh! The Sacred Cards (JP weekly sales),yu-gi-oh-the-sacred-cards-jp-weekly-sales,Role-Playing,E,nintendo,Konami,Konami,0.26,2003
 7263,Medarot 3: Kabuto / Kuwagata Version,medarot-3-kabuto,Role-Playing,unrated,nintendo,Imagineer,Natsume,0.27,2000
-7268,Punch-Out!!,punch-out,Sports,E,other,Nintendo,Nintendo IRD,0.05,2007
+7268,Punch-Out!!,punch-out,Sports,E,nintendo,Nintendo,Nintendo IRD,0.05,2007
 7274,Jikkyou Powerful Pro Yakyuu 5,jikkyou-powerful-pro-yakyuu-5,Sports,unrated,nintendo,Konami,Diamond Head,0.27,1998
 7286,Driveclub VR,driveclub-vr,Racing,E,playstation,Sony Interactive Entertainment,Evolution Studios,0.01,2016
 7287,Dragon Ball Z: Tenkaichi Tag Team,dragon-ball-z-tenkaichi-tag-team,Fighting,T,playstation,Namco Bandai,Dimps Corporation,0.09,2010
@@ -2523,7 +2523,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 7649,Spirit Camera: The Cursed Memoir,spirit-camera-the-cursed-memoir,Action-Adventure,T,nintendo,Nintendo,Tecmo Koei Games,0.06,2012
 7650,Bomberman Tournament,bomberman-tournament,Puzzle,E,nintendo,Activision,Hudson Soft,0.1,2001
 7651,Beyblade: Metal Fusion,beyblade-metal-fusion,Role-Playing,E,other,Hudson Soft,Hudson Soft,0.14,2010
-7658,Final Fantasy II,final-fantasy-ii,Role-Playing,unrated,nintendo,Square,SquareSoft,0.25,2001
+7658,Final Fantasy II,final-fantasy-ii,Role-Playing,unrated,other,Square,SquareSoft,0.25,2001
 7660,Marie no Atelier: Salburg no Renkinjutsushi,marie-no-atelier-salburg-no-renkinjutsushi,Role-Playing,unrated,playstation,Gust,Gust,0.23,1997
 7674,Samurai Shodown II,samurai-shodown-ii,Fighting,unrated,other,SNK,SNK Corporation,0.25,1994
 7682,Disgaea 2: Dark Hero Days,disgaea-2-dark-hero-days,Role-Playing,T,playstation,NIS America,Nippon Ichi Software,0.12,2009
@@ -2954,7 +2954,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 9286,GameBoy Wars,gameboy-wars,Strategy,unrated,nintendo,Nintendo,Intelligent Systems,0.18,1991
 9287,MotoGP 15,motogp-15,Racing,unrated,playstation,Milestone S.r.l.,Milestone S.r.l.,0.04,2015
 9293,Conception II: Children of the Seven Stars,conception-ii-children-of-the-seven-stars,Role-Playing,M,playstation,Atlus,Spike Chunsoft,0.04,2014
-9300,Chocobo no Fushigi Dungeon for WonderSwan,chocobo-no-fushigi-dungeon-for-wonderswan,Role-Playing,unrated,nintendo,Bandai,SquareSoft,0.18,1999
+9300,Chocobo no Fushigi Dungeon for WonderSwan,chocobo-no-fushigi-dungeon-for-wonderswan,Role-Playing,unrated,other,Bandai,SquareSoft,0.18,1999
 9301,International Superstar Soccer 2000 (JP weekly sales),international-superstar-soccer-2000-jp-weekly-sales,Sports,E,nintendo,Konami,KCEO,0.18,2000
 9302,Klonoa: Door to Phantomile,klonoa-door-to-phantomile,Platform,E,playstation,Namco,Namco,0.17,1998
 9309,Hatsune Miku and Future Stars: Project Mirai,hatsune-miku-and-future-stars-project-mirai,Misc,unrated,nintendo,Sega,Unknown,0.18,2012
@@ -3029,7 +3029,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 9605,Jikkyou Powerful Pro Yakyuu 2014,jikkyou-powerful-pro-yakyuu-2014,Sports,unrated,playstation,Konami Digital Entertainment,Konami Digital Entertainment,0.17,2014
 9607,Hanjuku Eiyuu Tai 3D,hanjuku-eiyuu-tai-3d,Role-Playing,unrated,playstation,Square Enix,Square Enix,0.17,2003
 9608,.hack//G.U. Vol.3//Redemption,.hack,Role-Playing,T,playstation,Namco Bandai,CyberConnect2,0.17,2007
-9610,Super Robot Taisen Compact 2 Dai-1-Bu,super-robot-taisen-compact-2-dai-1-bu,Strategy,unrated,nintendo,Bandai,Bandai,0.17,2000
+9610,Super Robot Taisen Compact 2 Dai-1-Bu,super-robot-taisen-compact-2-dai-1-bu,Strategy,unrated,other,Bandai,Bandai,0.17,2000
 9618,Macross Ultimate Frontier,macross-ultimate-frontier,Action,unrated,playstation,Namco Bandai,ArtDink,0.17,2009
 9626,Tokyo Xtreme Racer,tokyo-xtreme-racer,Racing,E,other,Crave Entertainment,Genki,0.17,1999
 9628,Fighter Maker,fighter-maker,Fighting,T,playstation,Agetec,ASCII Entertainment,0.07,1999
@@ -4315,7 +4315,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 14064,Katekyoo Hitman Reborn! DS: Fate of Heat - Hono no Unmei,katekyoo-hitman-reborn-ds-fate-of-heat-hono-no-unmei,Role-Playing,unrated,other,Takara Tomy,Takara Tomy,0.07,2008
 14065,Ultimate Marvel vs. Capcom 3,ultimate-marvel-vs-capcom-3,Fighting,T,xbox,Capcom,Capcom,0.04,2011
 14067,Shin Lucky * Star: Moe Drill ~Tabidachi~,shin-lucky-star-moe-drill-tabidachi,Action,unrated,other,Kadokawa Shoten,Type-Moon,0.07,2007
-14073,Mario Tennis,mario-tennis,Sports,E,other,Nintendo,Camelot Software Planning,0,2010
+14073,Mario Tennis,mario-tennis,Sports,E,nintendo,Nintendo,Camelot Software Planning,0,2010
 14077,Nichibeikan Pro Yakyuu: Final League,nichibeikan-pro-yakyuu-final-league,Sports,unrated,playstation,Square,SquareSoft,0.07,2002
 14078,God Hand,god-hand,Action,M,playstation,Capcom,Clover Studio,0.07,2006
 14080,Shin Chan: Las Nuevas Aventuras Para Wii!,shin-chan-las-nuevas-aventuras-para-wii,Action,unrated,nintendo,505 Games,Matrix Software,0.07,2008
@@ -5123,7 +5123,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 16371,Gacharoku,gacharoku,Misc,unrated,playstation,Sony Computer Entertainment,Agenda,0.03,2002
 16377,Steins;Gate 0,steinsgate-0,Adventure,unrated,playstation,5pb,5pb. Inc.,0.03,2015
 16381,Original Story from Fairy Tail: Gekitotsu! Kardia Daiseidou,original-story-from-fairy-tail-gekitotsu-kardia-daiseidou,Role-Playing,unrated,other,Hudson Soft,Hudson Soft,0.03,2011
-16382,SD Gundam G Generation: Gather Beat 2,sd-gundam-g-generation-gather-beat-2,Strategy,unrated,nintendo,Bandai,Bandai,0.03,2001
+16382,SD Gundam G Generation: Gather Beat 2,sd-gundam-g-generation-gather-beat-2,Strategy,unrated,other,Bandai,Bandai,0.03,2001
 16389,Women's Volleyball Championship,womens-volleyball-championship,Sports,E,playstation,Agetec,Spike,0.03,2008
 16390,Jikkyou Powerful Pro Yakyuu Wii Ketteiban,jikkyou-powerful-pro-yakyuu-wii-ketteiban,Sports,unrated,nintendo,Konami,PawaPuro Production,0.03,2007
 16391,Rakushou! Pachi-Slot Sengen 5: Rio Paradise,rakushou-pachi-slot-sengen-5-rio-paradise,Misc,unrated,playstation,Tecmo,Net Corporation,0.03,2007
@@ -6699,7 +6699,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,jp_sales,year
 19678,Pro Golfer Saru,pro-golfer-saru,Sports,unrated,nintendo,Namco Bandai,Eighting,0.01,2008
 19679,Kimi no Hitomi ni Hit Me,kimi-no-hitomi-ni-hit-me,Visual Novel,unrated,playstation,Entergram,Giga,0.01,2018
 19680,"Utatte Touch, Utouchi!!","utouchi""",Misc,unrated,other,Konami,Konami,0.01,2010
-19682,Kidou Senshi Gundam Vol.3 -A Baoa Qu-,kidou-senshi-gundam-vol3-a-baoa-qu-,Strategy,unrated,nintendo,Bandai,Bandai,0.01,2002
+19682,Kidou Senshi Gundam Vol.3 -A Baoa Qu-,kidou-senshi-gundam-vol3-a-baoa-qu-,Strategy,unrated,other,Bandai,Bandai,0.01,2002
 19687,Heiligenstadt no Uta,heiligenstadt-no-uta,Adventure,unrated,playstation,Nippon Cultural Broadcasting eXtend,Nippon Cultural Broadcasting eXtend,0.01,2017
 19688,Koibana Days,koibana-days,Misc,unrated,playstation,Idea Factory,Unknown,0.01,2013
 19691,The Idolm@ster Twins,the-idolmster-twins,Misc,unrated,xbox,Namco Bandai,Namco Bandai Games,0.01,2009

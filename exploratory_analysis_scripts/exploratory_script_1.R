@@ -1,4 +1,5 @@
 library(tidyverse)
+library(infer)
 
 
 sales_global <- read_csv("clean_data/sales_global.csv")
@@ -6,7 +7,7 @@ sales_north_america <- read_csv("clean_data/sales_north_america.csv")
 sales_europe <- read_csv("clean_data/sales_europe.csv")
 sales_japan <- read_csv("clean_data/sales_japan.csv")
 sales_other <- read_csv("clean_data/sales_other.csv")
-sales_all_regions <- read_csv("clean_data/sales_all_regions.csv")
+sales_regional <- read_csv("clean_data/sales_all_regions.csv")
 
 
 # Firstly, I'd like to see which genres have the most sales for each region
@@ -91,11 +92,11 @@ sales_all_regions %>%
   geom_point(aes(colour = region)) +
   geom_smooth(aes(colour = region), method = "lm", alpha = 0.5, se = FALSE) +
   xlab("Global Sales") +
-  ylab("Regional Sales")
+  ylab("Regional Sales") +
+  scale_colour_viridis_d(option = "viridis")
 
 # Okay, so clearly European and American sales are postitively correlated with global sales. Japanese sales have a much lower correlation with 
-# global sales (the gradient of the line is much shallower), which means that sales of a game in Japan are less good at predicting if a game is
-# going to sell well globally.
+# global sales (the gradient of the line is much shallower), which means that sales of a game in Japan are less influential on global game sales
 
 
 
@@ -288,3 +289,52 @@ sales_global %>%
 # This graph is relatively similar to the initial graph. 
 
 
+# I'm looking to see whether a game published by a AAA publisher sells better than one published by another publisher. 
+sales_regional %>% 
+  group_by(publisher_ranked, region) %>% 
+  summarise(median_sales = median(sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = publisher_ranked, y = median_sales, fill = number_games)) +
+  geom_col() +
+  facet_wrap(~ region) +
+  scale_fill_viridis_b()
+
+sales_global %>% 
+  group_by(publisher_ranked) %>% 
+  summarise(median_sales = median(global_sales), number_games = length(unique(name))) %>% 
+  ggplot(aes(x = publisher_ranked, y = median_sales, fill = number_games)) +
+  geom_col() +
+  geom_label(aes(label = number_games)) +
+  scale_fill_viridis_b()
+
+# These two graphs show that AAA published games tend to sell better than non AAA games. I'd like to investigate whether this difference 
+# is statistically significant.
+
+# H0 = There is no difference between median number of sales of games published by ranked and non ranked publishers. 
+# Ha = Games published by ranked publisers have a higher median number of copies sold than unranked publishers. 
+
+
+# If Ha is true, then median(ranked = TRUE) - median(ranked = FALSE) = positive
+
+# alpha = 0.01
+
+# Generating the null distribution by permutation. I'll do this for each separate region. 
+
+null_distriubution_na <- sales_regional %>% 
+  filter(region == "north america") %>% 
+  # this is the relationship between number of sales and whether it's published by a ranked publisher that I'm testing
+  specify(sales ~ publisher_ranked) %>% 
+  # The null hypothesis is that there is no relationship between ranked publishers and number of sales
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10000, type = "permute") %>% 
+  # The sample stat is the median of ranked sales minus the median of unranked sales, so this is the order specified in the calculate step
+  calculate(stat = "diff in medians", order = c(TRUE, FALSE))
+
+
+
+observed_stat_na <- sales_regional %>% 
+  filter(region == "north america") %>% 
+  specify(sales ~ publisher_ranked) %>% 
+  calculate(stat = "diff in medians", order = c(TRUE, FALSE))
+
+p_value_na <- null_distriubution_na %>% 
+  get_p_value(obs_stat = observed_stat_na, direction = "right")

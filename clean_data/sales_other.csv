@@ -6045,7 +6045,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,other_sales,ye
 7655,NHL 08,nhl-08,Action,E10,xbox,Electronic Arts,Unknown,0.02,2007
 7656,Midway's Greatest Arcade Hits,midways-greatest-arcade-hits,Misc,E,nintendo,Midway Games,Pocket Studios,0,2001
 7657,Imagine: Ballet Star,imagine-ballet-star,Simulation,E,other,Ubisoft,Spike Co.,0.02,2008
-7658,Final Fantasy II,final-fantasy-ii,Role-Playing,unrated,nintendo,Square,SquareSoft,0,2001
+7658,Final Fantasy II,final-fantasy-ii,Role-Playing,unrated,other,Square,SquareSoft,0,2001
 7659,WipEout Fusion,wipeout-fusion,Racing,E,playstation,BAM! Entertainment,Studio Liverpool,0.03,2002
 7660,Marie no Atelier: Salburg no Renkinjutsushi,marie-no-atelier-salburg-no-renkinjutsushi,Role-Playing,unrated,playstation,Gust,Gust,0.02,1997
 7661,Golden Nugget Casino,golden-nugget-casino,Misc,E,nintendo,Majesco,Majesco Games,0,2004
@@ -7315,7 +7315,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,other_sales,ye
 9297,MotoGP,motogp,Racing,E,nintendo,Capcom,MileStone Inc.,0.02,2009
 9298,Mushroom Men: The Spore Wars,mushroom-men-the-spore-wars,Action,E10,nintendo,SouthPeak Interactive,Red Fly Studio,0.01,2008
 9299,Doctor Who: Return to Earth,doctor-who-return-to-earth,Adventure,unrated,nintendo,Asylum Entertainment,Asylum Entertainment,0.02,2010
-9300,Chocobo no Fushigi Dungeon for WonderSwan,chocobo-no-fushigi-dungeon-for-wonderswan,Role-Playing,unrated,nintendo,Bandai,SquareSoft,0,1999
+9300,Chocobo no Fushigi Dungeon for WonderSwan,chocobo-no-fushigi-dungeon-for-wonderswan,Role-Playing,unrated,other,Bandai,SquareSoft,0,1999
 9302,Klonoa: Door to Phantomile,klonoa-door-to-phantomile,Platform,E,playstation,Namco,Namco,0.01,1998
 9303,Marvel Super Hero Squad: Comic Combat,marvel-super-hero-squad-comic-combat,Action,E10,nintendo,THQ,THQ,0.02,2011
 9304,Vietcong: Purple Haze,vietcong-purple-haze,Shooter,M,playstation,Gathering of Developers,Coyote Developments,0.02,2004
@@ -14407,7 +14407,7 @@ rank,name,basename,genre,esrb_rating,platform,publisher,developer,other_sales,ye
 19672,Leisure Suit Larry: Box Office Bust,leisure-suit-larry-box-office-bust,Adventure,M,pc,Codemasters,Team17 Software,0,2009
 19675,Aliens versus Predator,aliens-versus-predator,Shooter,M,pc,Fox Interactive,Rebellion Developments,0,1999
 19681,Jagged Alliance 2,jagged-alliance-2,Strategy,T,pc,TalonSoft,SirTech,0,1999
-19682,Kidou Senshi Gundam Vol.3 -A Baoa Qu-,kidou-senshi-gundam-vol3-a-baoa-qu-,Strategy,unrated,nintendo,Bandai,Bandai,0,2002
+19682,Kidou Senshi Gundam Vol.3 -A Baoa Qu-,kidou-senshi-gundam-vol3-a-baoa-qu-,Strategy,unrated,other,Bandai,Bandai,0,2002
 19683,Defender,defender,Shooter,E,nintendo,Midway Games,OutLook Entertainment,0,2002
 19684,ATV Drift & Tricks,atv-drift-amp-tricks,Racing,E,nintendo,Microids,Artefacts Studio,0,2018
 19685,Scratches,scratches,Adventure,T,pc,Got Game Entertainment,Nucleosys,0,2006
