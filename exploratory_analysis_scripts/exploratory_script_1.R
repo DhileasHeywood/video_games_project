@@ -319,7 +319,7 @@ sales_global %>%
 
 # Generating the null distribution by permutation. I'll do this for each separate region. 
 
-null_distriubution_na <- sales_regional %>% 
+null_distribution_na <- sales_regional %>% 
   filter(region == "north america") %>% 
   # this is the relationship between number of sales and whether it's published by a ranked publisher that I'm testing
   specify(sales ~ publisher_ranked) %>% 
@@ -336,5 +336,36 @@ observed_stat_na <- sales_regional %>%
   specify(sales ~ publisher_ranked) %>% 
   calculate(stat = "diff in medians", order = c(TRUE, FALSE))
 
-p_value_na <- null_distriubution_na %>% 
+null_distribution_na %>% 
+  visualise() +
+  shade_p_value(obs_stat = observed_stat_na, direction = "right")
+
+p_value_na <- null_distribution_na %>% 
   get_p_value(obs_stat = observed_stat_na, direction = "right")
+
+# The p-value is 0.0051, which is less the alpha value of 0.01, meaning that the median sales of games released by ranked publishers
+# is significantly higher than the median sales of games released by unranked pulishers. In North America.
+
+
+null_distribution_eu <- sales_regional %>% 
+  filter(region == "europe") %>% 
+  specify(sales ~ publisher_ranked) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10000, type = "permute") %>% 
+  calculate(stat = "diff in medians", order = c(TRUE, FALSE))
+
+
+observed_stat_eu <- sales_regional %>% 
+  filter(region == "europe") %>% 
+  specify(sales ~ publisher_ranked) %>% 
+  calculate(stat = "diff in medians", order = c(TRUE, FALSE))
+
+null_distribution_eu %>% 
+  visualise() +
+  shade_p_value(obs_stat = observed_stat_eu, direction = "right")
+
+p_value_eu <- null_distribution_eu %>% 
+  get_p_value(obs_stat = observed_stat_eu, direction = "right")
+
+# The p-value is 0, which is less than the alpha value of 0.01, meaning that the median sales of games released by ranked publishers is
+# significantly higher than the median sales of games released by unranked publishers. In Europe. 
