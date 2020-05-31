@@ -1,4 +1,5 @@
-# video_games_project
+# CodeClan Final Project
+## Video Game Sales Analysis
 Analysis performed for fictional games development studio BigBox Games. 
 
 #### Project Brief
