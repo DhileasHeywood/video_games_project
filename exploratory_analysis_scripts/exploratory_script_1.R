@@ -369,3 +369,13 @@ p_value_eu <- null_distribution_eu %>%
 
 # The p-value is 0, which is less than the alpha value of 0.01, meaning that the median sales of games released by ranked publishers is
 # significantly higher than the median sales of games released by unranked publishers. In Europe. 
+
+
+# These results show that there is a genuine difference. It doesn't explain why there's a difference. I expect that it's because the 
+# companies that are ranked are likely to be the bigger companies with higher marketing budgets. 
+
+
+
+
+
+
